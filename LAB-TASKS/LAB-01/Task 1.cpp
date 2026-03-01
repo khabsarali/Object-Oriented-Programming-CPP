@@ -23,3 +23,5 @@ s1.marks=80;
 s1.diplaystudent();
 return 0;
 }
+
+
