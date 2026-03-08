@@ -1,29 +1,23 @@
-#include<iostream>
+#include <iostream>
+#include "header1.h"
 using namespace std;
 
-class student{
-	public:
-	string name;
-	int rollNumber;
-	float marks;
+int main()
+{
+	Student obj;
+	string A;
+	int B;
+	float C;
 	
-	void getData(){
-		cout<<"Enter Name: ";
-		cin>>name;
-		cout<<"Enter Roll Number: ";
-		cin>>rollNumber;
-		cout<<"Enter Marks: ";
-		cin>>marks;		
-	}
-	void displayData(){
-	    cout<<"Name: "<<name<<endl;
-		cout<<"Roll Number: "<<rollNumber<<endl;	
-		cout<<"Marks: "<<marks<<endl;		
-	}
-};
-int main(){
-	student s1;
-	s1.getData();
-	s1.displayData();
+	cout<<"Enter 1st name: ";
+	cin>>A;
+	cout<<"Enter roll no: ";
+	cin>>B;
+	cout<<"Enter marks: ";
+	cin>>C;
+	obj.getData(A,B,C);
+	cout<<"\n";
+	obj.Displaydata();
+
 	return 0;
 }
