@@ -1,5 +1,5 @@
 #include <iostream>
-#include "header3.h"
+#include "voter.h"
 using namespace std;
 
 int main()
