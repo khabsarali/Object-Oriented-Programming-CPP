@@ -8,11 +8,13 @@
 
 #include <iostream>
 #include <memory>
-
 #include "Car.h"
+#include "Customer.h"
 #include "Motorbike.h"
+#include "Rental.h"
 #include "RentalSystem.h"
 #include "Truck.h"
+#include "Vehicle.h"
 
 int main() {
     RentalSystem system;

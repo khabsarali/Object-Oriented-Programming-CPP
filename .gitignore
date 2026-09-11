@@ -1,0 +1,10 @@
+# Build binaries
+*.exe
+*.o
+*.obj
+*.out
+
+# IDE and tool configs
+.vscode/
+.claude/
+.crun/
