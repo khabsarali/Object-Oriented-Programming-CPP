@@ -1,39 +1,61 @@
-#include<iostream>
+#include <iostream>
+
 using namespace std;
-class shape{
-	public:
-		virtual double area(){
-			return 0;
-		}
+
+// Abstract base class representing a geometric shape
+class Shape {
+public:
+    // Virtual function to enable dynamic (runtime) dispatch
+    virtual double calculateArea() const {
+        return 0.0;
+    }
+
+    // Virtual destructor ensuring proper cleanup in polymorphic usage
+    virtual ~Shape() {}
 };
-class rectangle:public shape{
-	private:
-		int lenght;
-		int width;
-	public:
-	rectangle(int l, int w){
-		lenght=l;
-		width=w;
-	}
-	double area()override{
-		return lenght*width;
-	}
+
+// Derived class for Rectangle
+class Rectangle : public Shape {
+private:
+    double length;
+    double width;
+
+public:
+    Rectangle(double l, double w) : length(l), width(w) {}
+
+    // Override the base virtual function
+    double calculateArea() const override {
+        return length * width;
+    }
 };
-class circle:public shape{
-	private:
-		int radius;
-	public:
-	circle( int r){
-		radius=r;
-	}
-	double area()override{
-		return 3.14 *radius *radius;
-	}
+
+// Derived class for Circle
+class Circle : public Shape {
+private:
+    double radius;
+    const double PI = 3.141592653589793;
+
+public:
+    Circle(double r) : radius(r) {}
+
+    // Override the base virtual function
+    double calculateArea() const override {
+        return PI * radius * radius;
+    }
 };
- int main(){
- 	shape *s= new rectangle(5,3);
- 	shape *s1= new circle(2);
- 	cout<<"The area of rectangle is"<<s->area()<<endl;
- 	cout<<"The area of circle is"<<s1->area()<<endl;
- 	return 0;
- }
+
+int main() {
+    // Dynamic polymorphism: Base pointers pointing to derived objects
+    Shape* rectShape = new Rectangle(5.0, 3.0);
+    Shape* circleShape = new Circle(2.0);
+
+    // Dynamic dispatch invokes the overridden methods at runtime
+    cout << "Calculated area of rectangle: " << rectShape->calculateArea() << endl;
+    cout << "Calculated area of circle   : " << circleShape->calculateArea() << endl;
+
+    // Free allocated memory
+    delete rectShape;
+    delete circleShape;
+
+    return 0;
+}

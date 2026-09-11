@@ -1,47 +1,62 @@
 #include <iostream>
+
 using namespace std;
+
+// Base class defining common salary computation interface
 class Employee {
 public:
-    virtual double calculateSalary() {
-        cout << "Base Employee salary calculation called" << endl;
-        return 0;
+    virtual double calculateNetSalary() const {
+        cout << "[Base] Default employee salary calculation invoked." << endl;
+        return 0.0;
     }
+
+    virtual ~Employee() {}
 };
 
+// Derived class for permanent salaried staff
 class PermanentEmployee : public Employee {
 private:
-    double basicSalary, bonus;
+    double monthlyBasic;
+    double performanceBonus;
 
 public:
-    PermanentEmployee(double b, double bo) {
-        basicSalary = b;
-        bonus = bo;
-    }
+    PermanentEmployee(double basic, double bonus)
+        : monthlyBasic(basic), performanceBonus(bonus) {}
 
-    double calculateSalary() {
-        return basicSalary + bonus;
+    // Overridden method adding base salary and bonus
+    double calculateNetSalary() const override {
+        return monthlyBasic + performanceBonus;
     }
 };
+
+// Derived class for hourly contract staff
 class ContractEmployee : public Employee {
 private:
     double hourlyRate;
-    int hoursWorked;
+    int hoursBilled;
 
 public:
-    ContractEmployee(double r, int h) {
-        hourlyRate = r;
-        hoursWorked = h;
-    }
+    ContractEmployee(double rate, int hours)
+        : hourlyRate(rate), hoursBilled(hours) {}
 
-    double calculateSalary() {
-        return hourlyRate * hoursWorked;
+    // Overridden method multiplying hourly rate by hours worked
+    double calculateNetSalary() const override {
+        return hourlyRate * hoursBilled;
     }
 };
 
 int main() {
-Employee* emp = new   PermanentEmployee(50000, 10000);   
-  Employee* emp1 = new  ContractEmployee(500, 40);
-    cout << "Permanent Employee Salary: " << emp->calculateSalary() << endl;
-    cout << "Contract Employee Salary: " << emp1->calculateSalary() << endl;
+    // Polymorphic pointer array
+    Employee* permWorker = new PermanentEmployee(50000.0, 10000.0);
+    Employee* contractWorker = new ContractEmployee(500.0, 40);
+
+    cout << "--- Payroll Calculation ---" << endl;
+    cout << "Permanent Employee Salary : $" << permWorker->calculateNetSalary() << endl;
+    cout << "Contract Employee Salary  : $" << contractWorker->calculateNetSalary() << endl;
+
+    // Clean up heap memory
+    delete permWorker;
+    delete contractWorker;
+
     return 0;
 }

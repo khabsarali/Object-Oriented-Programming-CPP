@@ -1,29 +1,38 @@
 #include <iostream>
 #include <string>
+
 using namespace std;
-class bankAccount
-{
-	private:
-		string accountNumber, accountHolder;
-		double balance;
-	public:
-		bankAccount(string account_no, string account_holder, double Balance)
-		{
-			accountNumber=account_no;
-			accountHolder=account_holder;
-			balance=Balance;
-		}
-	void display()
-	{
-		cout<<"Account Number: "<<accountNumber<<endl;
-		cout<<"Account Holder: "<<accountHolder<<endl;
-		cout<<"Balance: "<<balance<<endl;
-	}
-	
+
+// Class demonstrating parameterized constructor initialization
+class BankAccount {
+private:
+    string accountNumber;
+    string accountHolder;
+    double currentBalance;
+
+public:
+    // Parameterized constructor initializing account attributes
+    BankAccount(string accNum, string holderName, double initialDeposit) {
+        accountNumber = accNum;
+        accountHolder = holderName;
+        currentBalance = initialDeposit;
+    }
+
+    // Display bank account information
+    void displayAccountSummary() {
+        cout << "--- Bank Account Summary ---" << endl;
+        cout << "Account Number : " << accountNumber << endl;
+        cout << "Account Holder : " << accountHolder << endl;
+        cout << "Balance        : $" << currentBalance << endl;
+    }
 };
-int main()
-{
-	bankAccount b("PK0309800780100","Muhammad Awais",10000);
-	b.display();
-	return 0;
+
+int main() {
+    // Instantiate account object with constructor arguments
+    BankAccount account("PK0309800780100", "Muhammad Awais", 10000.00);
+
+    // Output account record
+    account.displayAccountSummary();
+
+    return 0;
 }

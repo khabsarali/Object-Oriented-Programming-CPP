@@ -1,58 +1,53 @@
 #include <iostream>
+
 using namespace std;
 
-/* ========== CLASS TEMPLATE ========== */
+// Class template for basic arithmetic operations
 template <typename T>
-class Calculator {
+class ArithmeticCalculator {
 private:
-    T a, b;
+    T operand1;
+    T operand2;
 
 public:
     // Constructor
-    Calculator(T x, T y) {
-        a = x;
-        b = y;
+    ArithmeticCalculator(T op1, T op2) : operand1(op1), operand2(op2) {}
+
+    T add() const {
+        return operand1 + operand2;
     }
 
-    T add() {
-        return a + b;
+    T subtract() const {
+        return operand1 - operand2;
     }
 
-    T subtract() {
-        return a - b;
-    }
-
-    T multiply() {
-        return a * b;
+    T multiply() const {
+        return operand1 * operand2;
     }
 };
 
-/* ========== MAIN FUNCTION ========== */
 int main() {
-
-    // ===== INT INPUT =====
-    int x1, y1;
+    // Integer operations test
+    int intA, intB;
     cout << "Enter two integers: ";
-    cin >> x1 >> y1;
+    cin >> intA >> intB;
 
-    Calculator<int> c1(x1, y1);
+    ArithmeticCalculator<int> intCalc(intA, intB);
+    cout << "\n--- Integer Results ---" << endl;
+    cout << "Addition       : " << intCalc.add() << endl;
+    cout << "Subtraction    : " << intCalc.subtract() << endl;
+    cout << "Multiplication : " << intCalc.multiply() << endl;
 
-    cout << "\nINT RESULTS:" << endl;
-    cout << "Add: " << c1.add() << endl;
-    cout << "Subtract: " << c1.subtract() << endl;
-    cout << "Multiply: " << c1.multiply() << endl;
+    // Floating-point operations test
+    double dblA, dblB;
+    cout << "\nEnter two double values: ";
+    cin >> dblA >> dblB;
 
-    // ===== DOUBLE INPUT =====
-    double x2, y2;
-    cout << "\nEnter two doubles: ";
-    cin >> x2 >> y2;
-
-    Calculator<double> c2(x2, y2);
-
-    cout << "\nDOUBLE RESULTS:" << endl;
-    cout << "Add: " << c2.add() << endl;
-    cout << "Subtract: " << c2.subtract() << endl;
-    cout << "Multiply: " << c2.multiply() << endl;
+    ArithmeticCalculator<double> dblCalc(dblA, dblB);
+    cout << "\n--- Double Results ---" << endl;
+    cout << "Addition       : " << dblCalc.add() << endl;
+    cout << "Subtraction    : " << dblCalc.subtract() << endl;
+    cout << "Multiplication : " << dblCalc.multiply() << endl;
 
     return 0;
 }

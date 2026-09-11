@@ -1,21 +1,30 @@
 #include <iostream>
 #include <fstream>
+#include <string>
+
 using namespace std;
 
 int main() {
+    const string targetFile = "notes.txt";
+    ifstream inputHandle(targetFile);
 
-    ifstream file("notes.txt");
-
-    string line;
-    int count = 0;
-
-    while (getline(file, line)) {
-        count++;
+    // Verify if the target file can be opened
+    if (!inputHandle.is_open()) {
+        cerr << "Error: Unable to locate or open '" << targetFile << "'." << endl;
+        return 1;
     }
 
-    file.close();
+    string currentLine;
+    int lineCounter = 0;
 
-    cout << "Total number of lines in file: " << count << endl;
+    // Traverse the file line by line and increment counter
+    while (getline(inputHandle, currentLine)) {
+        lineCounter++;
+    }
+
+    inputHandle.close();
+
+    cout << "Total number of lines in '" << targetFile << "': " << lineCounter << endl;
 
     return 0;
 }

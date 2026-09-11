@@ -1,50 +1,48 @@
 #include <iostream>
+
 using namespace std;
 
-class Printer 
-{
+// Base class 1: Printer functionality
+class Printer {
 public:
-    void print_document()
-	{
-        cout << "Printing document..." << endl;
+    void printDocument() {
+        cout << "[Printer] Sending document to print queue and generating hardcopy..." << endl;
     }
 };
 
-
-class Scanner
-{
+// Base class 2: Scanner functionality
+class Scanner {
 public:
-    void scan_document()
-	{
-        cout << "Scanning document..." << endl;
+    void scanDocument() {
+        cout << "[Scanner] Optical scan initiated. Digital image captured." << endl;
     }
 };
 
-
-class Photocopier : public Printer, public Scanner
-{
+// Derived class demonstrating Multiple Inheritance (Printer + Scanner)
+class Photocopier : public Printer, public Scanner {
 public:
-    void photocopy()
-	{
-        cout << "Photocopy process started:" << endl;
-        	cout<<""<<endl; 
-        scan_document(); 
-        print_document(); 
-        cout << "Photocopy completed." << endl;
+    // Execute end-to-end photocopy routine
+    void makeCopy() {
+        cout << "[Photocopier] Starting photocopy job..." << endl;
+        scanDocument();   // Method from Scanner base class
+        printDocument();  // Method from Printer base class
+        cout << "[Photocopier] Photocopy job finished successfully." << endl;
     }
 };
 
 int main() {
-    Photocopier p;
+    Photocopier copierDevice;
 
-    cout << "--- Using Photocopier as Printer ---" << endl;
-    p.print_document();
+    // Test individual base class interfaces
+    cout << "--- Testing Standalone Printer Functionality ---" << endl;
+    copierDevice.printDocument();
 
-    cout << "\n--- Using Photocopier as Scanner ---" << endl;
-    p.scan_document();
+    cout << "\n--- Testing Standalone Scanner Functionality ---" << endl;
+    copierDevice.scanDocument();
 
-    cout << "\n--- Using Photocopier to Photocopy ---" << endl;
-    p.photocopy();
+    // Test combined functionality
+    cout << "\n--- Testing Integrated Photocopy Workflow ---" << endl;
+    copierDevice.makeCopy();
 
     return 0;
 }

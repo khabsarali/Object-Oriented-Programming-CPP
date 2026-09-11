@@ -1,35 +1,37 @@
 #include <iostream>
+#include <string>
+
 using namespace std;
-class Vehicle
-{
+
+// Grandparent class in inheritance chain
+class Vehicle {
 public:
-    Vehicle(string type)
-	{
-        cout << "Vehicle constructor: " << type << endl;
+    Vehicle(string category) {
+        cout << "[1] Vehicle constructor executed: Category = " << category << endl;
     }
 };
 
-// Derived class (Vehicle -> Car)
-class Car : public Vehicle
-{
+// Parent class inheriting from Vehicle
+class Car : public Vehicle {
 public:
-    Car(string type, string brand) : Vehicle(type)
-	{
-        cout << "Car constructor: " << brand << endl;
+    Car(string category, string make) : Vehicle(category) {
+        cout << "[2] Car constructor executed: Make = " << make << endl;
     }
 };
 
-// Derived class (Car -> ElectricCar)
+// Child class inheriting from Car
 class ElectricCar : public Car {
 public:
-    ElectricCar(string type, string brand, string battery) : Car(type, brand)
-	{
-        cout << "Electric Car constructor: " << battery << endl;
+    ElectricCar(string category, string make, string batteryCapacity)
+        : Car(category, make) {
+        cout << "[3] ElectricCar constructor executed: Battery = " << batteryCapacity << endl;
     }
 };
 
-int main()
-{
-    ElectricCar e("Transport", "Tesla", "150kWh");
+int main() {
+    cout << "--- Instantiating ElectricCar Object ---" << endl;
+    // Constructor chain executes from base (Vehicle) -> Car -> ElectricCar
+    ElectricCar tesla("Passenger Transport", "Tesla", "150kWh");
+
     return 0;
 }

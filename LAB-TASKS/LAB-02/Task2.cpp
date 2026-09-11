@@ -1,15 +1,17 @@
 #include <iostream>
 #include "rectangle.h"
+
 using namespace std;
 
+int main() {
+    Rectangle rect;
 
-int main()
-{
-	Rectangle obj1;
-	obj1.setDimension();
-	obj1.area();
-	obj1.perimeter();
-	
-	
-	return 0;
+    // Prompt user for dimensions
+    rect.readDimensions();
+
+    // Display calculated results
+    cout << "\nCalculated Area      : " << rect.computeArea() << endl;
+    cout << "Calculated Perimeter : " << rect.computePerimeter() << endl;
+
+    return 0;
 }

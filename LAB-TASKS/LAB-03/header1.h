@@ -1,56 +1,56 @@
-#ifndef PRODUCT_H
-#define PRODUCT_H
+#ifndef HEADER1_H
+#define HEADER1_H
+
 #include <iostream>
 #include <string>
-using namespace std;
-class Product
-{
-	//data members
-	private:
-		string name;
-		float price;
-		int quantity;
-	//member functions
-	public:
-	void setname(string n)
-	{
-		if(!n.empty())
-		{
-			name=n;
-		}
-		else
-		{
-			cout<<"Name can't be empty."<<endl;
-		}
-	}
-	
-	void setprice(double p)
-	{
-		if(p>0)
-		{
-			price=p;
-		}
-		else
-		{
-			cout<<"invalid price."<<endl;
-		}
-	}
-	void setquantity(int q)
-	{
-		if(q>=0)
-		{
-			quantity=q;
-		}
-		else
-		{
-			cout<<"invalid quantity."<<endl;
-		}
-	}
-	//getter functions
-	string getname() {return name;}
-	float getprice() {return price;}
-	int getquantity(){return quantity;}
-};
 
+using namespace std;
+
+// Class demonstrating encapsulation with validation logic in mutators
+class Product {
+private:
+    string itemName;
+    double unitPrice;
+    int stockQuantity;
+
+public:
+    // Setters with validation checks
+    void setName(const string& name) {
+        if (!name.empty()) {
+            itemName = name;
+        } else {
+            cout << "[Validation Warning] Product name cannot be empty." << endl;
+        }
+    }
+
+    void setPrice(double price) {
+        if (price > 0.0) {
+            unitPrice = price;
+        } else {
+            cout << "[Validation Warning] Price must be greater than zero." << endl;
+        }
+    }
+
+    void setQuantity(int qty) {
+        if (qty >= 0) {
+            stockQuantity = qty;
+        } else {
+            cout << "[Validation Warning] Quantity cannot be negative." << endl;
+        }
+    }
+
+    // Getter functions
+    string getName() const {
+        return itemName;
+    }
+
+    double getPrice() const {
+        return unitPrice;
+    }
+
+    int getQuantity() const {
+        return stockQuantity;
+    }
+};
 
 #endif

@@ -1,55 +1,60 @@
 #include <iostream>
+#include <string>
+
 using namespace std;
 
-class Calculator{
-	public:
-		double addition(double a, double b){
-			return a+b;
-		}
-		
-		double multiplication(double a, double b){
-			return a*b;
-		}
+// Independent utility class for arithmetic operations
+class CalculatorTool {
+public:
+    double add(double num1, double num2) {
+        return num1 + num2;
+    }
+
+    double multiply(double num1, double num2) {
+        return num1 * num2;
+    }
 };
 
-class Student{
-	private:
-		Calculator *calc;
-	public:
-		Student(Calculator *c){
-			calc = c;
-		}
-		
-		void addition_result(double a, double b){
-			if(calc){
-				cout<<"Result (Addition) : "<<calc->addition(a,b)<<endl;
-			}
-		}
-		
-		void multiplication_result(double a, double b){
-			if(calc){
-				cout<<"Result (Product) : "<<calc->multiplication(a,b)<<endl;
-			}
-		}
-		
+// Class demonstrating Aggregation: Student holds a loose reference (pointer) to an external CalculatorTool
+class Student {
+private:
+    string studentName;
+    CalculatorTool* sharedCalculator; // Aggregated reference; life not tied to Student
+
+public:
+    Student(string name, CalculatorTool* toolPtr)
+        : studentName(name), sharedCalculator(toolPtr) {}
+
+    void calculateSum(double a, double b) {
+        if (sharedCalculator != nullptr) {
+            double res = sharedCalculator->add(a, b);
+            cout << studentName << " computed addition (" << a << " + " << b << ") = " << res << endl;
+        }
+    }
+
+    void calculateProduct(double a, double b) {
+        if (sharedCalculator != nullptr) {
+            double res = sharedCalculator->multiply(a, b);
+            cout << studentName << " computed product (" << a << " * " << b << ") = " << res << endl;
+        }
+    }
 };
 
-int main(){
-	
-	Calculator c;
-	
-	Student s1(&c);
-	Student s2(&c);
-	
-	cout<<"~~Student 01~~"<<endl;
-	s1.addition_result(5.5,6.5);
-	s1.multiplication_result(5.0,6.0);
-	
-	cout<<endl;
-	
-	cout<<"~~Student 02~~"<<endl;
-	s2.addition_result(4.5,3.5);
-	s2.multiplication_result(3.0,2.0);
-	
-	return 0;
+int main() {
+    // Single shared resource existing independently
+    CalculatorTool sharedDeskCalculator;
+
+    // Multiple students sharing the same calculator via aggregation
+    Student student1("Student 01", &sharedDeskCalculator);
+    Student student2("Student 02", &sharedDeskCalculator);
+
+    cout << "=== Aggregation Demonstration ===" << endl;
+    student1.calculateSum(5.5, 6.5);
+    student1.calculateProduct(5.0, 6.0);
+
+    cout << endl;
+    student2.calculateSum(4.5, 3.5);
+    student2.calculateProduct(3.0, 2.0);
+
+    return 0;
 }

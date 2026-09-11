@@ -1,20 +1,24 @@
 #include <iostream>
+#include <string>
+
 using namespace std;
 
-/* ========== FUNCTION TEMPLATE ========== */
+// Function template to output any given value twice
 template <typename T>
-void printTwice(T val)
-{
-    cout << val << endl;
-    cout << val << endl;
+void outputTwice(T value) {
+    cout << value << endl;
+    cout << value << endl;
 }
 
-/* ========== MAIN FUNCTION ========== */
-int main()
-{
-    printTwice(5);            // int
-    printTwice(3.14);         // double
-    printTwice("Hello");      // string
+int main() {
+    cout << "--- Integer Test ---" << endl;
+    outputTwice(5);
+
+    cout << "\n--- Floating Point Test ---" << endl;
+    outputTwice(3.14);
+
+    cout << "\n--- String Test ---" << endl;
+    outputTwice(string("Hello"));
 
     return 0;
 }

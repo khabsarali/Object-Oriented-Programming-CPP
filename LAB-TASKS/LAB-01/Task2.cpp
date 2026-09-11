@@ -1,46 +1,63 @@
 #include <iostream>
+#include <string>
+
 using namespace std;
 
-struct Student {
+// Structure representing a single student entry
+struct StudentRecord {
     string firstName;
     string lastName;
     int rollNumber;
     float marks;
 
-    void displayStudentInfo() {
-        cout << "\nFull Name: " << firstName << " " << lastName << endl;
-        cout << "Marks: " << marks << endl;
+    // Output formatted details of the student
+    void showRecord(int index) {
+        cout << "\n[Student #" << index << "]" << endl;
+        cout << "Full Name   : " << firstName << " " << lastName << endl;
+        cout << "Roll Number : " << rollNumber << endl;
+        cout << "Marks       : " << marks << endl;
     }
 };
 
 int main() {
-    int n;
+    int totalCount = 0;
 
-    cout << "Enter number of students: ";
-    cin >> n;
+    cout << "Enter the total number of students: ";
+    cin >> totalCount;
 
-    Student students[n];  // array of structures
+    if (totalCount <= 0) {
+        cout << "Invalid number of students entered." << endl;
+        return 1;
+    }
 
-    for(int i = 0; i < n; i++) {
-        cout << "\nEnter details for student " << i+1 << endl;
+    // Allocate an array of student structures dynamically
+    StudentRecord* records = new StudentRecord[totalCount];
 
+    // Collect information for each student
+    for (int i = 0; i < totalCount; i++) {
+        cout << "\n--- Entering details for student " << (i + 1) << " ---" << endl;
         cout << "First Name: ";
-        cin >> students[i].firstName;
-
+        cin >> records[i].firstName;
         cout << "Last Name: ";
-        cin >> students[i].lastName;
-
+        cin >> records[i].lastName;
         cout << "Roll Number: ";
-        cin >> students[i].rollNumber;
-
+        cin >> records[i].rollNumber;
         cout << "Marks: ";
-        cin >> students[i].marks;
+        cin >> records[i].marks;
     }
 
-    // Display all students
-    for(int i = 0; i < n; i++) {
-        students[i].displayStudentInfo();
+    // Display all recorded students
+    cout << "\n===============================";
+    cout << "\n       STUDENT DIRECTORY       ";
+    cout << "\n===============================";
+
+    for (int i = 0; i < totalCount; i++) {
+        records[i].showRecord(i + 1);
     }
+
+    // Release dynamically allocated memory
+    delete[] records;
+    records = nullptr;
 
     return 0;
 }

@@ -1,37 +1,32 @@
 #include <iostream>
+
 using namespace std;
 
-/* ========== FUNCTION TEMPLATE ========== */
+// Generic function template returning the smaller of two values
 template <typename T>
-T findMin(T a, T b)
-{
-    if (a < b)
-        return a;
-    else
-        return b;
+T getMinimum(T val1, T val2) {
+    return (val1 < val2) ? val1 : val2;
 }
 
-/* ========== MAIN FUNCTION ========== */
-int main()
-{
-    int i1, i2;
-    double d1, d2;
-    char c1, c2;
+int main() {
+    int int1, int2;
+    double dbl1, dbl2;
+    char char1, char2;
 
-    // ===== INTEGER INPUT =====
+    // Integer comparison
     cout << "Enter two integers: ";
-    cin >> i1 >> i2;
-    cout << "Min (int): " << findMin(i1, i2) << endl;
+    cin >> int1 >> int2;
+    cout << "Minimum integer: " << getMinimum(int1, int2) << endl;
 
-    // ===== DOUBLE INPUT =====
-    cout << "\nEnter two doubles: ";
-    cin >> d1 >> d2;
-    cout << "Min (double): " << findMin(d1, d2) << endl;
+    // Floating-point comparison
+    cout << "\nEnter two floating-point numbers: ";
+    cin >> dbl1 >> dbl2;
+    cout << "Minimum floating-point value: " << getMinimum(dbl1, dbl2) << endl;
 
-    // ===== CHAR INPUT =====
+    // Character comparison
     cout << "\nEnter two characters: ";
-    cin >> c1 >> c2;
-    cout << "Min (char): " << findMin(c1, c2) << endl;
+    cin >> char1 >> char2;
+    cout << "Minimum character (lexicographical): " << getMinimum(char1, char2) << endl;
 
     return 0;
 }

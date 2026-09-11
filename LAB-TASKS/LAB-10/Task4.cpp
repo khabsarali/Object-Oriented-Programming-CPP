@@ -1,33 +1,44 @@
 #include <iostream>
 #include <fstream>
+#include <string>
+
 using namespace std;
 
 int main() {
+    const string databaseFile = "students.txt";
 
-    // Step 1: Write student details to file
-    ofstream writeFile("students.txt");
+    // Step 1: Write formatted student records to file
+    ofstream recordWriter(databaseFile);
+    if (!recordWriter.is_open()) {
+        cerr << "Error: Unable to open student database for writing." << endl;
+        return 1;
+    }
 
-    writeFile << "Absar 101\n";
-    writeFile << "Bilal 102\n";
-    writeFile << "Hassan 103\n";
+    recordWriter << "Absar 101\n";
+    recordWriter << "Bilal 102\n";
+    recordWriter << "Hassan 103\n";
+    recordWriter.close();
 
-    writeFile.close();
+    // Step 2: Read records back from the file and format output
+    ifstream recordReader(databaseFile);
+    if (!recordReader.is_open()) {
+        cerr << "Error: Unable to open student database for reading." << endl;
+        return 1;
+    }
 
-    // Step 2: Read and display student details
-    ifstream readFile("students.txt");
+    cout << "=== Enrolled Students Directory ===" << endl;
+    cout << "Name\tRoll No" << endl;
+    cout << "--------------------" << endl;
 
-    string name;
-    int rollNo;
+    string studentName;
+    int rollNumber;
 
-    cout << "Student Details:\n";
+    // Parse structured data token-by-token
+    while (recordReader >> studentName >> rollNumber) {
+        cout << studentName << "\t" << rollNumber << endl;
+    }
 
-   string line;
-
-while (getline(readFile, line)) {
-    cout << line << endl;
-}
-
-    readFile.close();
+    recordReader.close();
 
     return 0;
 }

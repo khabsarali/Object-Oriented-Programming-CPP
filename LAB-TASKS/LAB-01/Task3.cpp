@@ -1,38 +1,47 @@
 #include <iostream>
+#include <string>
+
 using namespace std;
 
-struct Student {
+// Structure definition for individual student profile
+struct StudentProfile {
     string firstName;
     string lastName;
     int rollNumber;
     float marks;
 
-    void displayStudentInfo() {
-        cout << "\nFull Name: " << firstName << " " << lastName << endl;
-        cout << "Marks: " << marks << endl;
+    // Display student profile data
+    void displayInfo() {
+        cout << "\n--- Student Profile Output ---" << endl;
+        cout << "Name        : " << firstName << " " << lastName << endl;
+        cout << "Roll Number : " << rollNumber << endl;
+        cout << "Marks       : " << marks << endl;
     }
 };
 
 int main() {
+    // Dynamically allocate memory for a StudentProfile on the heap
+    StudentProfile* studentPtr = new StudentProfile;
 
-    Student *ptr = new Student;   // dynamic memory allocation
+    // Take user input using the arrow (->) member access operator
+    cout << "Enter student's first name: ";
+    cin >> studentPtr->firstName;
 
-    cout << "Enter First Name: ";
-    cin >> ptr->firstName;
+    cout << "Enter student's last name: ";
+    cin >> studentPtr->lastName;
 
-    cout << "Enter Last Name: ";
-    cin >> ptr->lastName;
+    cout << "Enter roll number: ";
+    cin >> studentPtr->rollNumber;
 
-    cout << "Enter Roll Number: ";
-    cin >> ptr->rollNumber;
+    cout << "Enter obtained marks: ";
+    cin >> studentPtr->marks;
 
-    cout << "Enter Marks: ";
-    cin >> ptr->marks;
+    // Call member function through the pointer
+    studentPtr->displayInfo();
 
-    // Call function using pointer
-    ptr->displayStudentInfo();
-
-    delete ptr;   // free memory
+    // Free heap memory to prevent memory leaks
+    delete studentPtr;
+    studentPtr = nullptr;
 
     return 0;
 }

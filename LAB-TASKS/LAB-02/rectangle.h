@@ -1,32 +1,36 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
+
 #include <iostream>
-#include <string>
+
 using namespace std;
-class Rectangle
-{
-	public:
-	//data members
-	int length, width;
-	//member functions
-	void setDimension();
-	int area();	
-	int perimeter();
+
+// Class definition for Rectangle geometry
+class Rectangle {
+public:
+    double length;
+    double width;
+
+    // Member function declarations
+    void readDimensions();
+    double computeArea();
+    double computePerimeter();
 };
-//member functions
-void Rectangle::setDimension()
-{
-	cout<<"Enter length: ";
-	cin>>length;
-	cout<<"Enter width: ";
-	cin>>width;
+
+// Member function definitions outside the class using scope resolution operator ::
+void Rectangle::readDimensions() {
+    cout << "Enter rectangle length: ";
+    cin >> length;
+    cout << "Enter rectangle width: ";
+    cin >> width;
 }
-int Rectangle::area()
-{
-	cout<<"Area is: "<<length*width<<endl;
+
+double Rectangle::computeArea() {
+    return length * width;
 }
-int Rectangle::perimeter()
-{
-	cout<<"Perimeter is: "<<2*(length+width);
+
+double Rectangle::computePerimeter() {
+    return 2.0 * (length + width);
 }
+
 #endif

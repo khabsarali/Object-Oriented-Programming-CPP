@@ -1,25 +1,27 @@
 #ifndef TEMPERATURE_H
 #define TEMPERATURE_H
+
 #include <iostream>
-#include <string>
+
 using namespace std;
-class Temperature
-{
-	//data member
-	public:
-		int temp_in_celsius,temp_in_farenheit;
-	//member function
-	void converter()
-	{
-		cout<<"Enter temperature in Celsius: "<<endl;
-		cin>>temp_in_celsius;
-		temp_in_farenheit= ((temp_in_celsius)*(9.0/5))+32;
-	}
-	void display()
-	{
-		cout<<"Temperature in farenheit is: "<<temp_in_farenheit<<endl;
-		
-	}
-	
+
+// Class to handle temperature conversions
+class Temperature {
+public:
+    double celsiusValue;
+    double fahrenheitValue;
+
+    // Convert stored Celsius temperature to Fahrenheit
+    void convertToFahrenheit() {
+        cout << "Enter temperature in Celsius: ";
+        cin >> celsiusValue;
+        fahrenheitValue = (celsiusValue * (9.0 / 5.0)) + 32.0;
+    }
+
+    // Display the converted temperature
+    void displayResult() {
+        cout << celsiusValue << " Celsius = " << fahrenheitValue << " Fahrenheit" << endl;
+    }
 };
+
 #endif

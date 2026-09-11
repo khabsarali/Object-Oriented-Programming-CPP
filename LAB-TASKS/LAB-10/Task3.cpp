@@ -1,33 +1,52 @@
 #include <iostream>
 #include <fstream>
+#include <string>
+
 using namespace std;
 
 int main() {
+    const string srcFilename = "source.txt";
+    const string destFilename = "destination.txt";
 
-    // Step 1: Create and write to source file
-    ofstream source("source.txt");
-    source << "Hello World\n";
-    source << "This is the source file\n";
-    source << "We are copying this content\n";
-    source.close();
+    // Step 1: Create and populate the source document
+    ofstream srcWriter(srcFilename);
+    if (!srcWriter.is_open()) {
+        cerr << "Error: Failed to create " << srcFilename << endl;
+        return 1;
+    }
+    srcWriter << "Hello World\n";
+    srcWriter << "This is the source file\n";
+    srcWriter << "We are copying this content\n";
+    srcWriter.close();
 
     // Step 2: Open source file for reading
-    ifstream readSource("source.txt");
-
-    // Step 3: Create destination file
-    ofstream dest("destination.txt");
-
-    string line;
-
-    // Step 4: Copy content line by line
-    while (getline(readSource, line)) {
-        dest << line << endl;
+    ifstream srcReader(srcFilename);
+    if (!srcReader.is_open()) {
+        cerr << "Error: Could not open source file for reading." << endl;
+        return 1;
     }
 
-    readSource.close();
-    dest.close();
+    // Step 3: Open destination file for writing
+    ofstream destWriter(destFilename);
+    if (!destWriter.is_open()) {
+        cerr << "Error: Could not open destination file for writing." << endl;
+        srcReader.close();
+        return 1;
+    }
 
-    cout << "Content copied successfully from source.txt to destination.txt" << endl;
+    // Step 4: Transfer content stream line by line
+    string bufferLine;
+    int copiedLines = 0;
+    while (getline(srcReader, bufferLine)) {
+        destWriter << bufferLine << "\n";
+        copiedLines++;
+    }
+
+    srcReader.close();
+    destWriter.close();
+
+    cout << "Success: " << copiedLines << " lines copied from '" 
+         << srcFilename << "' to '" << destFilename << "'." << endl;
 
     return 0;
 }

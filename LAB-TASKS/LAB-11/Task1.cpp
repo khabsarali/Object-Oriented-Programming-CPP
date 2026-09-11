@@ -1,34 +1,32 @@
 #include <iostream>
+
 using namespace std;
 
-class Box
-{
+// Forward declaration / Class definition
+class Box {
 private:
     int length;
 
 public:
-    // Constructor
-    Box(int l)
-    {
-        length = l;
-    }
+    // Parameterized constructor
+    Box(int len) : length(len) {}
 
-    // Friend function declaration
-    friend void displayLength(Box b);
+    // Friend function declaration granting non-member access to private members
+    friend void showBoxLength(const Box& b);
 };
 
-// Friend function definition
-void displayLength(Box b)
-{
-    cout << "Length = " << b.length << endl;
+// Non-member friend function definition
+void showBoxLength(const Box& b) {
+    // Directly accessing private member 'length'
+    cout << "Box Dimension (Length) = " << b.length << " units" << endl;
 }
 
-int main()
-{
-    Box b1(15);   
+int main() {
+    // Instantiate Box object
+    Box sampleBox(15);
 
-    // Call friend function like a normal function
-    displayLength(b1);
+    // Call friend function like a standard non-member function
+    showBoxLength(sampleBox);
 
     return 0;
 }

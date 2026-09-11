@@ -1,48 +1,47 @@
 #include <iostream>
+#include <string>
+
 using namespace std;
-class Product
-{
-	private:
-		string name;
-		int price;
-	public:
-		Product()
-		{
-			name="Not Assigned";
-			price=0;
-		}
-		Product(string n, int p)
-		{
-			name=n;
-			price=p;
-		}
-		void displayProduct()
-		{
-			cout<<"----Details----"<<endl;
-			cout<<"Name: "<<name<<endl;
-			cout<<"Price: "<<price<<endl;
-		}
+
+// Base class representing a general retail product
+class Product {
+private:
+    string productName;
+    int productPrice;
+
+public:
+    // Default constructor
+    Product() : productName("Not Assigned"), productPrice(0) {}
+
+    // Parameterized constructor
+    Product(string name, int price) : productName(name), productPrice(price) {}
+
+    void printProductDetails() const {
+        cout << "--- Product Specifications ---" << endl;
+        cout << "Name  : " << productName << endl;
+        cout << "Price : $" << productPrice << endl;
+    }
 };
-class Electronics : public Product
-{
-	private:
-		int warranty_year;
-	public:
-		//Constructor chaining
-		Electronics(string n, int p, int warranty) : Product(n,p)
-		{
-			warranty_year=warranty;
-		}
-		void display()
-		{
-			displayProduct();
-			cout<<"Warranty: "<<warranty_year<<" years"<<endl;
-		}
+
+// Derived class representing electronic goods
+class Electronics : public Product {
+private:
+    int warrantyPeriodYears;
+
+public:
+    // Constructor chaining: delegating base attributes to Product constructor
+    Electronics(string name, int price, int warrantyYears)
+        : Product(name, price), warrantyPeriodYears(warrantyYears) {}
+
+    void printFullDetails() const {
+        printProductDetails();
+        cout << "Warranty : " << warrantyPeriodYears << " year(s)" << endl;
+    }
 };
-int main()
-{
-	Electronics e("TV",78000,4);
-	e.display();
-	
-	return 0;
+
+int main() {
+    Electronics tvItem("Smart LED TV", 78000, 4);
+    tvItem.printFullDetails();
+
+    return 0;
 }

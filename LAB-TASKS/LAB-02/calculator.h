@@ -1,33 +1,42 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
+
 #include <iostream>
-#include <string>
+
 using namespace std;
-class Calculator
-{
-	public:
-	//data members
-	float num1, num2;
-	//member functions (outside the class)
-	void add(float a, float b);
-	void subtract(float a, float b);
-	void multiply(float a, float b);
-	void divide(float a, float b);
+
+// Class providing fundamental arithmetic operations
+class Calculator {
+public:
+    double operand1;
+    double operand2;
+
+    // Declarations for arithmetic methods
+    double add(double a, double b);
+    double subtract(double a, double b);
+    double multiply(double a, double b);
+    double divide(double a, double b);
 };
-void Calculator::add(float a, float b)
-{
-	cout<<"Sum is: "<<a+b;
+
+// Definitions implemented outside the class
+double Calculator::add(double a, double b) {
+    return a + b;
 }
-void Calculator::subtract(float a, float b)
-{
-	cout<<"Difference is: "<<a-b;
+
+double Calculator::subtract(double a, double b) {
+    return a - b;
 }
-void Calculator::multiply(float a, float b)
-{
-	cout<<"Product is: "<<a*b;
+
+double Calculator::multiply(double a, double b) {
+    return a * b;
 }
-void Calculator::divide(float a, float b)
-{
-	cout<<"Division is: "<<a/b;
+
+double Calculator::divide(double a, double b) {
+    if (b == 0) {
+        cout << "Error: Division by zero is undefined!" << endl;
+        return 0;
+    }
+    return a / b;
 }
+
 #endif

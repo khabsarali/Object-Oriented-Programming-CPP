@@ -1,51 +1,57 @@
 #include <iostream>
+
 using namespace std;
 
-class Display{
-	private:
-		double final_value;
-	public:
-		Display(){
-			final_value = 0.0;
-		}
-		
-		double show_result(double value){
-			final_value = value;
-			cout<<"Result : "<<final_value<<endl;
-		}
-	
-		double getfinal_value() const {return final_value;}
-	
-	
+// Class representing a dedicated display unit (Component in Composition)
+class DisplayUnit {
+private:
+    double lastComputedValue;
+
+public:
+    DisplayUnit() : lastComputedValue(0.0) {}
+
+    // Output and store the current computed result
+    void renderResult(double val) {
+        lastComputedValue = val;
+        cout << "Display Screen -> Current Output: " << lastComputedValue << endl;
+    }
+
+    // Retrieve cached previous result
+    double getStoredValue() const {
+        return lastComputedValue;
+    }
 };
 
-class Calculator{
-	private:
-		Display display;
-	public:
-		Calculator(){} //Constructor...
-		
-		void add(double a, double b){
-			double result = a + b;
-			display.show_result(result);
-		}
-		
-		void multiply(double a, double b){
-			double result = a * b;
-			display.show_result(result);
-		}
-		
-		void show_previous_result() const {
-			cout<<"Previous Result : "<<display.getfinal_value()<<endl;
-		}
-		
+// Class demonstrating Composition: Calculator "has-a" DisplayUnit embedded by value
+class Calculator {
+private:
+    DisplayUnit display; // Tightly coupled component; lifetime bound to Calculator
+
+public:
+    Calculator() {}
+
+    void performAddition(double x, double y) {
+        double result = x + y;
+        display.renderResult(result);
+    }
+
+    void performMultiplication(double x, double y) {
+        double result = x * y;
+        display.renderResult(result);
+    }
+
+    void showMemoryRecall() const {
+        cout << "Display Memory Recall: " << display.getStoredValue() << endl;
+    }
 };
 
-int main(){
-	Calculator c1;
-	c1.add(6.4, 5.6);
-	c1.multiply(1.5, 3.0);
-	c1.show_previous_result();
-	
-	return 0;
+int main() {
+    Calculator calcDevice;
+
+    cout << "--- Performing Math Operations (Composition Demo) ---" << endl;
+    calcDevice.performAddition(6.4, 5.6);
+    calcDevice.performMultiplication(1.5, 3.0);
+    calcDevice.showMemoryRecall();
+
+    return 0;
 }

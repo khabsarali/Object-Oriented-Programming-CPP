@@ -1,93 +1,92 @@
 #include <iostream>
+#include <string>
+
 using namespace std;
 
-class Employee
-{
-	private:
-		string name;
-		int salary;
-	public:
-		Employee()
-		{
-			
-		}
-		Employee(string e_name, int e_salary)
-		{
-			name=e_name;
-			salary=e_salary;
-		}
-		 void input_employee()
-		{
+// Base class representing a general employee
+class Employee {
+private:
+    string empName;
+    int salary;
+
+public:
+    Employee() : empName(""), salary(0) {}
+
+    Employee(string name, int sal) : empName(name), salary(sal) {}
+
+    // Input basic employee info
+    void readEmployeeInfo() {
         cout << "Enter employee name: ";
-        cin>>name;
-        cout << "Enter salary: ";
+        cin >> empName;
+        cout << "Enter monthly salary: ";
         cin >> salary;
-    	}
-    	void display_employee()
-	{
-        cout << "Name: " << name << endl;
-        cout << "Salary: " << salary << endl;
     }
 
-		
+    // Display basic employee info
+    void showEmployeeInfo() const {
+        cout << "Name   : " << empName << endl;
+        cout << "Salary : $" << salary << endl;
+    }
 };
 
-class Developer : public Employee
-{
+// Derived class 1: Developer inheriting from Employee
+class Developer : public Employee {
 private:
-    string programming_language;
+    string primaryLanguage;
+
 public:
-    Developer() {}
+    Developer() : Employee(), primaryLanguage("") {}
 
-    void input_developer() 
-	{
-        input_employee();
-        cout << "Enter programming language: ";
-        cin>>programming_language;
-    }
-void display_developer() 
-	{
-        display_employee();  
-        cout << "Programming Language: " << programming_language << endl;
+    void readDeveloperInfo() {
+        readEmployeeInfo();
+        cout << "Enter primary programming language: ";
+        cin >> primaryLanguage;
     }
 
+    void showDeveloperProfile() const {
+        showEmployeeInfo();
+        cout << "Role   : Developer (" << primaryLanguage << ")" << endl;
+    }
 };
-class Designer : public Employee
- {
+
+// Derived class 2: Designer inheriting from Employee
+class Designer : public Employee {
 private:
-    string design_tool;
-public:
-    Designer() {}
+    string designTool;
 
-    void input_designer()
-	 {
-        input_employee();  
-        cout << "Enter design tool: ";
-       cin>>design_tool;
+public:
+    Designer() : Employee(), designTool("") {}
+
+    void readDesignerInfo() {
+        readEmployeeInfo();
+        cout << "Enter primary design tool: ";
+        cin >> designTool;
     }
 
-    void display_designer()
-	{
-        display_employee();  
-        cout << "Design Tool: " << design_tool << endl;
+    void showDesignerProfile() const {
+        showEmployeeInfo();
+        cout << "Role   : Designer (" << designTool << ")" << endl;
     }
 };
 
-int main() 
-{
-    cout << "Enter details for Developer:\n";
+int main() {
+    cout << "=== Developer Entry ===" << endl;
     Developer dev;
-    dev.input_developer();
+    dev.readDeveloperInfo();
 
-    cout << "\nEnter details for Designer:\n";
+    cout << "\n=== Designer Entry ===" << endl;
     Designer des;
-    des.input_designer();
+    des.readDesignerInfo();
 
-    cout << "\nDisplaying Developer Details:\n";
-    dev.display_developer();
+    cout << "\n==============================";
+    cout << "\n       STAFF DIRECTORY        ";
+    cout << "\n==============================" << endl;
 
-    cout << "\nDisplaying Designer Details:\n";
-    des.display_designer();
+    cout << "\n[Developer Details]" << endl;
+    dev.showDeveloperProfile();
+
+    cout << "\n[Designer Details]" << endl;
+    des.showDesignerProfile();
 
     return 0;
 }

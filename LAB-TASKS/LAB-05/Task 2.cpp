@@ -1,98 +1,85 @@
 #include <iostream>
+#include <string>
+
 using namespace std;
 
-class Person
-{
+// Base class in multilevel hierarchy
+class Person {
 private:
-    string name;
-    int age;
+    string personName;
+    int personAge;
+
 public:
-	Person()
-	{
-		
-	}
-    Person(string p_name, int p_age)
-    {
-        name = p_name;
-        age = p_age;
-    }
-    void input_person() 
-	 {
+    Person() : personName(""), personAge(0) {}
+
+    Person(string name, int age) : personName(name), personAge(age) {}
+
+    void inputPerson() {
         cout << "Enter name: ";
-        cin>>name;
+        cin >> personName;
         cout << "Enter age: ";
-        cin >> age;
+        cin >> personAge;
     }
-    void display_person()
-    {
-        cout << "Name: " << name << endl;
-        cout << "Age: " << age << endl;
+
+    void displayPerson() const {
+        cout << "Name : " << personName << endl;
+        cout << "Age  : " << personAge << " years" << endl;
     }
-     
 };
 
-class Employee : public Person
-{
+// Intermediate derived class inheriting from Person
+class Employee : public Person {
 private:
-    int employee_id;
+    int employeeId;
+
 public:
-	Employee()
-	{
-		
-	}
-    Employee(string p_name, int p_age, int employeeID) : Person(p_name, p_age)  
-    { 
-        employee_id = employeeID;
-    }
-    void input_employee() 
-	{
-        input_person(); 
+    Employee() : Person(), employeeId(0) {}
+
+    Employee(string name, int age, int id) : Person(name, age), employeeId(id) {}
+
+    void inputEmployee() {
+        inputPerson();
         cout << "Enter employee ID: ";
-        cin >> employee_id;
+        cin >> employeeId;
     }
 
-    void display_employee()
-    {
-        display_person();
-        cout << "Employee ID: " << employee_id << endl;
+    void displayEmployee() const {
+        displayPerson();
+        cout << "ID   : " << employeeId << endl;
     }
 };
 
-class Manager : public Employee
-{
+// Final derived class inheriting from Employee
+class Manager : public Employee {
 private:
-    string department;
+    string assignedDepartment;
+
 public:
-	Manager()
-	{
-		
-	}
-    Manager(string p_name, int p_age, int employeeID, string dpt) : Employee(p_name, p_age, employeeID) 
-    {
-        department = dpt;
-    }
-     void input_manager() 
-	 {
-        input_employee(); 
+    Manager() : Employee(), assignedDepartment("") {}
+
+    Manager(string name, int age, int id, string dept)
+        : Employee(name, age, id), assignedDepartment(dept) {}
+
+    void inputManager() {
+        inputEmployee();
         cout << "Enter department: ";
-        cin>>department;
+        cin >> assignedDepartment;
     }
 
-    void display_manager()
-    {
-        display_employee();
-        cout << "Department: " << department << endl;
+    void displayManager() const {
+        displayEmployee();
+        cout << "Dept : " << assignedDepartment << endl;
     }
 };
 
-int main()
-{
-    Manager m;
-     cout << "Enter manager details:\n";
-	m.input_manager();
+int main() {
+    Manager mgr;
 
-    cout << "\nDisplaying manager details:\n";
-    m.display_manager();
+    cout << "=== Enter Manager Details ===" << endl;
+    mgr.inputManager();
+
+    cout << "\n=== Manager Profile Summary ===" << endl;
+    mgr.displayManager();
 
     return 0;
 }

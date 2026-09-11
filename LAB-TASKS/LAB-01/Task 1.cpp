@@ -1,27 +1,36 @@
 #include <iostream>
+#include <string>
+
 using namespace std;
-//Declare Struct
-struct student{
-	string first_name , last_name;
-	int roll_number;
-	float marks;
-//Display Info
-	void diplaystudent()
-	    {
-        cout << "Student Name: " << first_name << " " << last_name << endl;
-        cout << "Roll Number: " << roll_number << endl;
+
+// Structure to hold basic student details
+struct Student {
+    string firstName;
+    string lastName;
+    int rollNumber;
+    float marks;
+
+    // Member function to print the stored student record
+    void printDetails() {
+        cout << "--- Student Information ---" << endl;
+        cout << "Name: " << firstName << " " << lastName << endl;
+        cout << "Roll Number: " << rollNumber << endl;
         cout << "Marks: " << marks << endl;
     }
-} s1;
-int main()
-{
-// Assign values to data members
-s1.first_name="Absar";
-s1.last_name="Ali";
-s1.roll_number=31;
-s1.marks=80;
-s1.diplaystudent();
-return 0;
+};
+
+int main() {
+    // Create an instance of Student
+    Student s;
+
+    // Populate data members directly
+    s.firstName = "Absar";
+    s.lastName = "Ali";
+    s.rollNumber = 31;
+    s.marks = 80.0f;
+
+    // Display the student's information
+    s.printDetails();
+
+    return 0;
 }
-
-
