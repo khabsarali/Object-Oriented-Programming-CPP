@@ -234,31 +234,20 @@ the code. That way a reader can understand the design from `include/` alone.
 
 ## How to Compile
 
-From inside the `LAB-14` folder:
+From inside the `LAB-TASKS/LAB-14` folder:
 
 ```bash
-g++ -std=c++17 -Wall -Wextra -I include main.cpp src/Vehicle.cpp src/Car.cpp src/Motorbike.cpp src/Truck.cpp src/Customer.cpp src/Rental.cpp src/RentalSystem.cpp -o rental
+g++ -std=c++14 -Wall -Wextra *.cpp -o rental.exe
 ```
 
 This exact command was used to build the project, and it compiles with **no warnings**.
-There is no build system (no Makefile or CMake) — the single command above is all that is
-needed.
-
-If your shell expands wildcards (Git Bash, Linux, macOS), this shorter form is equivalent:
-
-```bash
-g++ -std=c++17 -Wall -Wextra -I include main.cpp src/*.cpp -o rental
-```
-
-**Compiler used:** MinGW `g++` 6.3.0 with `-std=c++17`. The code deliberately sticks to core
-C++ features (`std::vector`, `std::string`, `std::unique_ptr`, `std::make_unique`, virtual
-functions, `override`), so it also builds unchanged on any newer C++17 compiler.
 
 ## How to Run
 
-```bash
-./rental          # Git Bash / Linux / macOS
-rental.exe        # Windows CMD or PowerShell
+```powershell
+.\rental.exe      # PowerShell
+rental.exe        # Windows CMD
+./rental.exe      # Git Bash / Linux / macOS
 ```
 
 The program takes no input — it runs one fixed scenario and prints the result.
