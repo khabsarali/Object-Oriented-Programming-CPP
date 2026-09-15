@@ -41,11 +41,8 @@ Calculated salary differently for permanent and contract employees using virtual
 **[LAB-10](LAB-TASKS/LAB-10/) — File Handling**
 Wrote to a file, read it back, appended to it, counted the lines in it, copied one file into another, and saved student records.
 
-**[LAB-11](LAB-TASKS/LAB-11/) — Friend Functions**
-Used a friend function to print the private `length` of a Box object from outside the class.
-
-**[LAB-12](LAB-TASKS/LAB-12/) — Friend Functions**
-Used a friend function that takes two Distance objects, adds their feet and inches, and converts the extra inches into feet.
+**[LAB-11-12](LAB-TASKS/LAB-11-12/) — Friend Functions, Static Members and Abstract Classes**
+Used a friend function to print the private `length` of a Box object, and another that adds the feet and inches of two Distance objects with carry-over. Counted bank accounts with a static data member, shared a company name across employees using a static member function, and built a hospital staff hierarchy on an abstract class with a pure virtual `performDuty()`.
 
 **[LAB-13](LAB-TASKS/LAB-13/) — Templates**
 Wrote function templates to print a value twice and to find the minimum of two values, and class templates (Pair and Calculator) that work with int, double and string.
